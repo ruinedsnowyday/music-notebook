@@ -1,6 +1,7 @@
 import { useNotebook } from './hooks/useNotebook';
 import { Toolbar } from './components/Toolbar';
 import { Cell } from './components/Cell';
+import { downloadMarkdown } from './lib/exportMarkdown';
 
 export function App() {
   const {
@@ -18,6 +19,7 @@ export function App() {
       <Toolbar
         onAddMarkdown={() => addCell('markdown')}
         onAddMusic={() => addCell('music')}
+        onExportMarkdown={() => downloadMarkdown(notebook)}
         onReset={reset}
       />
       <main className="notebook">

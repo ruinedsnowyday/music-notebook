@@ -1,10 +1,11 @@
 interface ToolbarProps {
   onAddMarkdown: () => void;
   onAddMusic: () => void;
+  onExportMarkdown: () => void;
   onReset: () => void;
 }
 
-export function Toolbar({ onAddMarkdown, onAddMusic, onReset }: ToolbarProps) {
+export function Toolbar({ onAddMarkdown, onAddMusic, onExportMarkdown, onReset }: ToolbarProps) {
   return (
     <header className="toolbar">
       <h1 className="toolbar-title">music-notebook</h1>
@@ -14,6 +15,9 @@ export function Toolbar({ onAddMarkdown, onAddMusic, onReset }: ToolbarProps) {
         </button>
         <button type="button" onClick={onAddMusic}>
           + Music
+        </button>
+        <button type="button" onClick={onExportMarkdown}>
+          Export Markdown
         </button>
         <button
           type="button"
