@@ -1,0 +1,85 @@
+{
+  "cli_version": "0.6.1",
+  "checkpoint_id": "8c360b7eb21d",
+  "session_id": "ses_1d3e74f62ffezmjUoOV1mxKJhr",
+  "strategy": "manual-commit",
+  "created_at": "2026-05-15T14:50:11.934381Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "src/App.tsx",
+    "src/components/Toolbar.tsx",
+    "src/lib/exportMarkdown.ts",
+    "src/styles.css"
+  ],
+  "agent": "OpenCode",
+  "model": "gpt-5.5",
+  "turn_id": "e58a3ba534f3",
+  "token_usage": {
+    "input_tokens": 74360,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 450560,
+    "output_tokens": 4623,
+    "api_call_count": 27
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-05-15T14:50:11.9219Z",
+    "agent_lines": 1,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 2,
+    "human_removed": 35,
+    "total_committed": 1,
+    "total_lines_changed": 38,
+    "agent_percentage": 2.631578947368421,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 65,
+      "user_lines_removed": 3,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "src/App.tsx": 2,
+        "src/components/Toolbar.tsx": 5,
+        "src/lib/abc.ts": 24,
+        "src/lib/exportMarkdown.ts": 30,
+        "src/styles.css": 2,
+        "src/types.ts": 2
+      },
+      "user_removed_per_file": {
+        "src/components/Toolbar.tsx": 1,
+        "src/lib/abc.ts": 2
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 37,
+      "user_lines_removed": 3,
+      "agent_lines_added": 68,
+      "agent_lines_removed": 3,
+      "user_added_per_file": {
+        "src/App.tsx": 2,
+        "src/components/Cell.tsx": 9,
+        "src/components/MusicCell.tsx": 17,
+        "src/hooks/useNotebook.ts": 9
+      },
+      "user_removed_per_file": {
+        "src/components/Cell.tsx": 1,
+        "src/components/MusicCell.tsx": 2
+      }
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 166,
+      "agent_lines_removed": 7
+    }
+  ]
+}
