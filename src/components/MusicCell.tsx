@@ -1,15 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Cell } from '../types';
-import { renderAbcInto, playAbc, isSynthSupported, type PlayHandle } from '../lib/abc';
+import {
+  renderAbcInto,
+  playAbc,
+  isSynthSupported,
+  INSTRUMENTS,
+  DEFAULT_PROGRAM,
+  type PlayHandle,
+} from '../lib/abc';
 
 interface MusicCellProps {
   cell: Cell;
   onSourceChange: (source: string) => void;
   onRun: () => void;
   onEdit: () => void;
+  onInstrumentChange: (program: number) => void;
 }
 
-export function MusicCell({ cell, onSourceChange, onRun, onEdit }: MusicCellProps) {
+export function MusicCell({
+  cell,
+  onSourceChange,
+  onRun,
+  onEdit,
+  onInstrumentChange,
+}: MusicCellProps) {
+  const program = cell.instrument ?? DEFAULT_PROGRAM;
   const renderRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const playHandleRef = useRef<PlayHandle | null>(null);
@@ -46,13 +61,23 @@ export function MusicCell({ cell, onSourceChange, onRun, onEdit }: MusicCellProp
     }
     playHandleRef.current?.stop();
     try {
-      const handle = await playAbc(cell.source);
+      const handle = await playAbc(cell.source, program);
       playHandleRef.current = handle;
       setPlaying(true);
     } catch (e) {
       setPlayError(e instanceof Error ? e.message : String(e));
       setPlaying(false);
     }
+  }
+
+  function handleInstrumentChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const next = Number(e.target.value);
+    if (playing) {
+      playHandleRef.current?.stop();
+      playHandleRef.current = null;
+      setPlaying(false);
+    }
+    onInstrumentChange(next);
   }
 
   function handleStop() {
@@ -93,6 +118,20 @@ export function MusicCell({ cell, onSourceChange, onRun, onEdit }: MusicCellProp
             ▶ Play
           </button>
         )}
+        <label className="instrument-picker">
+          <span className="instrument-label">Instrument</span>
+          <select
+            value={program}
+            onChange={handleInstrumentChange}
+            aria-label="Instrument for playback"
+          >
+            {INSTRUMENTS.map((inst) => (
+              <option key={inst.program} value={inst.program}>
+                {inst.label}
+              </option>
+            ))}
+          </select>
+        </label>
         <button type="button" onClick={onEdit} title="Edit ABC source">
           Edit
         </button>

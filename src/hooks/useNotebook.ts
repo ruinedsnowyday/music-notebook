@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import type { Cell, CellMode, CellType, Notebook } from '../types';
 import { loadNotebook, saveNotebook } from '../lib/storage';
+import { DEFAULT_PROGRAM } from '../lib/abc';
 
 const SAMPLE_NOTEBOOK: Notebook = {
   version: 1,
@@ -38,6 +39,7 @@ type Action =
   | { type: 'add'; cellType: CellType }
   | { type: 'update'; id: string; source: string }
   | { type: 'setMode'; id: string; mode: CellMode }
+  | { type: 'setInstrument'; id: string; instrument: number }
   | { type: 'delete'; id: string }
   | { type: 'move'; id: string; direction: 'up' | 'down' }
   | { type: 'reset' };
@@ -48,6 +50,7 @@ function newCell(cellType: CellType): Cell {
     type: cellType,
     mode: 'edit',
     source: cellType === 'markdown' ? '' : 'X:1\nT:Untitled\nM:4/4\nL:1/8\nK:C\n',
+    ...(cellType === 'music' ? { instrument: DEFAULT_PROGRAM } : {}),
   };
 }
 
@@ -64,6 +67,13 @@ function reducer(state: Notebook, action: Action): Notebook {
       return {
         ...state,
         cells: state.cells.map((c) => (c.id === action.id ? { ...c, mode: action.mode } : c)),
+      };
+    case 'setInstrument':
+      return {
+        ...state,
+        cells: state.cells.map((c) =>
+          c.id === action.id ? { ...c, instrument: action.instrument } : c,
+        ),
       };
     case 'delete':
       return { ...state, cells: state.cells.filter((c) => c.id !== action.id) };
@@ -99,6 +109,8 @@ export function useNotebook() {
     addCell: (cellType: CellType) => dispatch({ type: 'add', cellType }),
     updateSource: (id: string, source: string) => dispatch({ type: 'update', id, source }),
     setMode: (id: string, mode: CellMode) => dispatch({ type: 'setMode', id, mode }),
+    setInstrument: (id: string, instrument: number) =>
+      dispatch({ type: 'setInstrument', id, instrument }),
     deleteCell: (id: string) => dispatch({ type: 'delete', id }),
     moveCell: (id: string, direction: 'up' | 'down') => dispatch({ type: 'move', id, direction }),
     reset: () => dispatch({ type: 'reset' }),

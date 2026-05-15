@@ -9,6 +9,7 @@ export function App() {
     addCell,
     updateSource,
     setMode,
+    setInstrument,
     deleteCell,
     moveCell,
     reset,
@@ -37,6 +38,7 @@ export function App() {
               onSourceChange={(source) => updateSource(cell.id, source)}
               onRun={() => setMode(cell.id, 'render')}
               onEdit={() => setMode(cell.id, 'edit')}
+              onInstrumentChange={(program) => setInstrument(cell.id, program)}
               onDelete={() => deleteCell(cell.id)}
               onMove={(direction) => moveCell(cell.id, direction)}
             />

@@ -9,6 +9,7 @@ interface CellProps {
   onSourceChange: (source: string) => void;
   onRun: () => void;
   onEdit: () => void;
+  onInstrumentChange: (program: number) => void;
   onDelete: () => void;
   onMove: (direction: 'up' | 'down') => void;
 }
@@ -20,6 +21,7 @@ export function Cell({
   onSourceChange,
   onRun,
   onEdit,
+  onInstrumentChange,
   onDelete,
   onMove,
 }: CellProps) {
@@ -27,7 +29,13 @@ export function Cell({
     cell.type === 'markdown' ? (
       <MarkdownCell cell={cell} onSourceChange={onSourceChange} onRun={onRun} onEdit={onEdit} />
     ) : (
-      <MusicCell cell={cell} onSourceChange={onSourceChange} onRun={onRun} onEdit={onEdit} />
+      <MusicCell
+        cell={cell}
+        onSourceChange={onSourceChange}
+        onRun={onRun}
+        onEdit={onEdit}
+        onInstrumentChange={onInstrumentChange}
+      />
     );
 
   return (

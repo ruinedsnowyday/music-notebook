@@ -7,6 +7,8 @@ export interface Cell {
   type: CellType;
   source: string;
   mode: CellMode;
+  /** GM MIDI program for music cells. Ignored for markdown cells. */
+  instrument?: number;
 }
 
 export interface Notebook {
