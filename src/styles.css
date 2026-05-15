@@ -1,0 +1,248 @@
+:root {
+  --bg: #fafaf7;
+  --fg: #1a1a1a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --cell-bg: #ffffff;
+  --cell-bg-md: #fdfdfb;
+  --cell-bg-music: #f5f7ff;
+  --error: #b91c1c;
+  --code-bg: #f3f4f6;
+  --gutter: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  margin: -0.75rem -1rem 1.5rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.toolbar-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toolbar-reset {
+  margin-left: 0.5rem;
+  opacity: 0.7;
+}
+
+button {
+  font: inherit;
+  padding: 0.35rem 0.75rem;
+  background: #fff;
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.notebook {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.empty-note {
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.cell {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.5rem;
+  background: var(--cell-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+.cell-markdown {
+  background: var(--cell-bg-md);
+}
+
+.cell-music {
+  background: var(--cell-bg-music);
+}
+
+.cell-gutter {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.4rem;
+}
+
+.cell-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--gutter);
+  letter-spacing: 0.08em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.cell-body {
+  min-width: 0;
+}
+
+.cell-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: stretch;
+}
+
+.cell-actions button {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.cell-textarea {
+  width: 100%;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--fg);
+  resize: vertical;
+  min-height: 4rem;
+}
+
+.cell-textarea:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  border-color: var(--accent);
+}
+
+.cell-textarea-music {
+  background: #fbfbff;
+}
+
+.cell-rendered {
+  padding: 0.25rem 0.25rem 0;
+  cursor: default;
+}
+
+.cell-rendered-md {
+  cursor: text;
+}
+
+.cell-rendered-md h1,
+.cell-rendered-md h2,
+.cell-rendered-md h3 {
+  margin: 0.5em 0 0.25em;
+}
+
+.cell-rendered-md p {
+  margin: 0.5em 0;
+}
+
+.cell-rendered-md code {
+  background: var(--code-bg);
+  padding: 0.05em 0.3em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.cell-rendered-md pre {
+  background: var(--code-bg);
+  padding: 0.6em 0.8em;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.cell-rendered-md blockquote {
+  border-left: 3px solid var(--border);
+  margin: 0.5em 0;
+  padding: 0 0.8em;
+  color: var(--muted);
+}
+
+.cell-rendered-music {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.music-toolbar {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.music-score {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  overflow-x: auto;
+}
+
+.music-score svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.cell-empty {
+  color: var(--muted);
+}
+
+.cell-error {
+  color: var(--error);
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+}
